@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Promise Day – Komal 🤞❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Outfit&display=swap');
+
+body{
+    margin:0;
+    font-family:'Outfit',sans-serif;
+    background:radial-gradient(circle at top,#ffdde1,#ee9ca7);
+    height:100vh;
+    overflow:hidden;
+    color:#5a1a2c;
+}
+.center{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+.hidden{display:none;}
+.love{font-family:'Pacifico',cursive;}
+
+button{
+    margin-top:25px;
+    padding:14px 36px;
+    border:none;
+    border-radius:30px;
+    background:#ff5c8a;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.heart{
+    font-size:90px;
+    animation:beat 1.4s infinite;
+}
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+.promiseBox{
+    background:rgba(255,255,255,0.7);
+    padding:25px;
+    border-radius:25px;
+    max-width:340px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 SINGLE AUDIO (IMPORTANT) -->
+<audio id="bgm" preload="auto" loop></audio>
+
+<!-- SCENE 1 -->
+<div id="s1" class="center">
+    <div class="heart">🤞</div>
+    <h1 class="love" style="font-size:46px;">Promise Day</h1>
+    <p>Touch my promise, Komal ❤️</p>
+    <button onclick="start()">Touch My Promise</button>
+</div>
+
+<!-- SCENE 2 -->
+<div id="s2" class="center hidden">
+    <div class="promiseBox">
+        <h2 class="love">Komal 🤍</h2>
+        <p id="text" style="font-size:20px;min-height:150px;"></p>
+        <button onclick="nextPromise()">Next Promise 🤞</button>
+    </div>
+</div>
+
+<!-- SCENE 3 -->
+<div id="s3" class="center hidden">
+    <h2 class="love" style="font-size:40px;">Forever Promise 🤍</h2>
+    <p style="font-size:19px;max-width:330px;">
+        Ye sirf words nahi,<br>
+        meri zindagi ka promise hai Komal ❤️
+    </p>
+    <button onclick="finalSeal()">Lock Our Promise 💍</button>
+</div>
+
+<!-- FINAL SLIDE -->
+<div id="final" class="center hidden">
+    <div style="font-size:120px;">💍</div>
+    <h2 class="love" style="font-size:42px;">Promise Locked Forever 🤍</h2>
+    <p style="font-size:20px;max-width:320px;">
+        From this moment,<br>
+        our hearts are bound by promises 💖
+    </p>
+</div>
+
+<script>
+const promises=[
+ "Main tumhe hamesha khush rakhunga ❤️",
+ "Tumhari feelings meri zimmedari hongi 🤍",
+ "Main hamesha tumhari respect karunga 🤞",
+ "Har din tumhe special feel karaunga 💖"
+];
+
+const songs=[
+ "Romantic.mp3",
+ "Romantic2.mp3",
+ "Romantic3.mp3",
+ "Romantic4.mp3",
+ "Romantic5.mp3"
+];
+
+let i=0,j=0;
+const text=document.getElementById("text");
+const music=document.getElementById("bgm");
+
+function playSong(index){
+    music.pause();
+    music.src = songs[index];
+    music.load();
+    music.volume = 0.6;
+    music.play().catch(()=>{});
+}
+
+function show(id){
+    document.querySelectorAll(".center").forEach(s=>s.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+}
+
+function start(){
+    show("s2");
+    i=0; j=0;
+    text.innerHTML="";
+    playSong(0);   // Romantic.mp3
+    typeText();
+}
+
+function typeText(){
+    if(j<promises[i].length){
+        text.innerHTML += promises[i][j++];
+        setTimeout(typeText,45);
+    }
+}
+
+function nextPromise(){
+    if(i<promises.length-1){
+        i++; j=0;
+        text.innerHTML="";
+        playSong(i); // Romantic2,3,4
+        typeText();
+    }else{
+        show("s3");
+        playSong(4); // Romantic5
+    }
+}
+
+function finalSeal(){
+    show("final");
+    playSong(4);
+}
+</script>
+
+</body>
+</html>
