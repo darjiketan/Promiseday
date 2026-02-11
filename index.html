@@ -30,7 +30,7 @@ body{
 .love{font-family:'Pacifico',cursive;}
 
 button{
-    margin-top:25px;
+    margin-top:20px;
     padding:14px 36px;
     border:none;
     border-radius:30px;
@@ -60,7 +60,7 @@ button{
 
 <body>
 
-<!-- 🎵 SINGLE AUDIO (IMPORTANT) -->
+<!-- 🎵 SINGLE AUDIO -->
 <audio id="bgm" preload="auto" loop></audio>
 
 <!-- SCENE 1 -->
@@ -68,6 +68,9 @@ button{
     <div class="heart">🤞</div>
     <h1 class="love" style="font-size:46px;">Promise Day</h1>
     <p>Touch my promise, Komal ❤️</p>
+
+    <!-- 🔑 IMPORTANT BUTTON -->
+    <button onclick="enableMusic()">Enable Music 🎵</button>
     <button onclick="start()">Touch My Promise</button>
 </div>
 
@@ -90,7 +93,7 @@ button{
     <button onclick="finalSeal()">Lock Our Promise 💍</button>
 </div>
 
-<!-- FINAL SLIDE -->
+<!-- FINAL -->
 <div id="final" class="center hidden">
     <div style="font-size:120px;">💍</div>
     <h2 class="love" style="font-size:42px;">Promise Locked Forever 🤍</h2>
@@ -117,10 +120,20 @@ const songs=[
 ];
 
 let i=0,j=0;
+let musicEnabled=false;
+
 const text=document.getElementById("text");
 const music=document.getElementById("bgm");
 
+function enableMusic(){
+    musicEnabled=true;
+    playSong(0);
+    alert("Music Enabled ❤️");
+}
+
 function playSong(index){
+    if(!musicEnabled) return;
+
     music.pause();
     music.src = songs[index];
     music.load();
@@ -137,7 +150,7 @@ function start(){
     show("s2");
     i=0; j=0;
     text.innerHTML="";
-    playSong(0);   // Romantic.mp3
+    playSong(0);
     typeText();
 }
 
@@ -152,11 +165,11 @@ function nextPromise(){
     if(i<promises.length-1){
         i++; j=0;
         text.innerHTML="";
-        playSong(i); // Romantic2,3,4
+        playSong(i);
         typeText();
     }else{
         show("s3");
-        playSong(4); // Romantic5
+        playSong(4);
     }
 }
 
