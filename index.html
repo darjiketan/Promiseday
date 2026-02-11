@@ -63,7 +63,6 @@ button{
 
 <body>
 
-<!-- 🎵 BACKGROUND MUSIC -->
 <audio id="bgm" loop></audio>
 
 <!-- SCENE 1 -->
@@ -83,15 +82,13 @@ button{
     </div>
 </div>
 
-<!-- FINAL SCENE -->
+<!-- FINAL SLIDE -->
 <div id="final" class="center hidden">
     <div style="font-size:120px;">💍</div>
+    <h2 class="love" style="font-size:42px;">Promise Locked Forever 🤍</h2>
 
-    <h2 class="love" style="font-size:42px;">
-        Promise Locked Forever 🤍
-    </h2>
-
-    <p style="font-size:20px;max-width:320px;">
+    <!-- ✅ YE WALI LINE WAPAS ADD KI -->
+    <p style="font-size:20px;max-width:330px;margin-top:15px;">
         From this moment,<br>
         our hearts are bound by promises 💖
     </p>
@@ -117,14 +114,13 @@ const text=document.getElementById("text");
 const music=document.getElementById("bgm");
 
 function playSong(n){
-    music.pause();
     music.src = songs[n];
     music.volume = 0.7;
     music.play().catch(()=>{});
 }
 
 function start(){
-    playSong(0);           // ✅ user click → music allowed
+    playSong(0);   // 🔥 user click = music allowed
     show("s2");
     i=0; j=0;
     text.innerHTML="";
@@ -132,14 +128,14 @@ function start(){
 }
 
 function typeText(){
-    if(j < promises[i].length){
-        text.innerHTML += promises[i][j++];
+    if(j<promises[i].length){
+        text.innerHTML+=promises[i][j++];
         setTimeout(typeText,45);
     }
 }
 
 function nextPromise(){
-    if(i < promises.length-1){
+    if(i<promises.length-1){
         i++; j=0;
         playSong(i);
         text.innerHTML="";
@@ -152,9 +148,8 @@ function nextPromise(){
 
 function show(id){
     document.querySelectorAll(".center")
-        .forEach(s => s.classList.add("hidden"));
-    document.getElementById(id)
-        .classList.remove("hidden");
+        .forEach(s=>s.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
 }
 </script>
 
