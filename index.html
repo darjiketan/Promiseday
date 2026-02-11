@@ -46,6 +46,7 @@ button{
     font-size:90px;
     animation:beat 1.4s infinite;
 }
+
 @keyframes beat{
     0%,100%{transform:scale(1);}
     50%{transform:scale(1.2);}
@@ -62,6 +63,7 @@ button{
 
 <body>
 
+<!-- 🎵 BACKGROUND MUSIC -->
 <audio id="bgm" loop></audio>
 
 <!-- SCENE 1 -->
@@ -81,18 +83,26 @@ button{
     </div>
 </div>
 
-<!-- FINAL -->
+<!-- FINAL SCENE -->
 <div id="final" class="center hidden">
     <div style="font-size:120px;">💍</div>
-    <h2 class="love" style="font-size:42px;">Promise Locked Forever 🤍</h2>
+
+    <h2 class="love" style="font-size:42px;">
+        Promise Locked Forever 🤍
+    </h2>
+
+    <p style="font-size:20px;max-width:320px;">
+        From this moment,<br>
+        our hearts are bound by promises 💖
+    </p>
 </div>
 
 <script>
 const promises=[
- "Main tumhe hamesha khush rakhunga.❤️",
- "Tumhari feelings meri zimmedari hongi. 🤍",
- "Main hamesha tumhari respect karunga. 🤞",
- "Har din tumhe special feel karaunga. 💖"
+ "Main tumhe hamesha khush rakhunga ❤️",
+ "Tumhari feelings meri zimmedari hongi 🤍",
+ "Main hamesha tumhari respect karunga 🤞",
+ "Har din tumhe special feel karaunga 💖"
 ];
 
 const songs=[
@@ -107,13 +117,14 @@ const text=document.getElementById("text");
 const music=document.getElementById("bgm");
 
 function playSong(n){
+    music.pause();
     music.src = songs[n];
     music.volume = 0.7;
-    music.play();
+    music.play().catch(()=>{});
 }
 
 function start(){
-    playSong(0);   // 🔥 SAME CLICK ME MUSIC
+    playSong(0);           // ✅ user click → music allowed
     show("s2");
     i=0; j=0;
     text.innerHTML="";
@@ -121,14 +132,14 @@ function start(){
 }
 
 function typeText(){
-    if(j<promises[i].length){
-        text.innerHTML+=promises[i][j++];
+    if(j < promises[i].length){
+        text.innerHTML += promises[i][j++];
         setTimeout(typeText,45);
     }
 }
 
 function nextPromise(){
-    if(i<promises.length-1){
+    if(i < promises.length-1){
         i++; j=0;
         playSong(i);
         text.innerHTML="";
@@ -140,8 +151,10 @@ function nextPromise(){
 }
 
 function show(id){
-    document.querySelectorAll(".center").forEach(s=>s.classList.add("hidden"));
-    document.getElementById(id).classList.remove("hidden");
+    document.querySelectorAll(".center")
+        .forEach(s => s.classList.add("hidden"));
+    document.getElementById(id)
+        .classList.remove("hidden");
 }
 </script>
 
