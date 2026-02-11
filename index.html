@@ -16,6 +16,7 @@ body{
     overflow:hidden;
     color:#5a1a2c;
 }
+
 .center{
     position:fixed;
     inset:0;
@@ -26,6 +27,7 @@ body{
     text-align:center;
     padding:20px;
 }
+
 .hidden{display:none;}
 .love{font-family:'Pacifico',cursive;}
 
@@ -50,7 +52,7 @@ button{
 }
 
 .promiseBox{
-    background:rgba(255,255,255,0.7);
+    background:rgba(255,255,255,0.75);
     padding:25px;
     border-radius:25px;
     max-width:340px;
@@ -60,7 +62,7 @@ button{
 
 <body>
 
-<!-- 🎵 SINGLE AUDIO -->
+<!-- 🎵 SINGLE AUDIO PLAYER -->
 <audio id="bgm" preload="auto" loop></audio>
 
 <!-- SCENE 1 -->
@@ -69,7 +71,7 @@ button{
     <h1 class="love" style="font-size:46px;">Promise Day</h1>
     <p>Touch my promise, Komal ❤️</p>
 
-    <!-- 🔑 IMPORTANT BUTTON -->
+    <!-- MUST CLICK FIRST -->
     <button onclick="enableMusic()">Enable Music 🎵</button>
     <button onclick="start()">Touch My Promise</button>
 </div>
@@ -112,14 +114,14 @@ const promises=[
 ];
 
 const songs=[
- "Romantic.mp3",
- "Romantic2.mp3",
- "Romantic3.mp3",
- "Romantic4.mp3",
- "Romantic5.mp3"
+ "./romantic.mp3",
+ "./romantic2.mp3",
+ "./romantic3.mp3",
+ "./romantic4.mp3",
+ "./romantic5.mp3"
 ];
 
-let i=0,j=0;
+let i=0, j=0;
 let musicEnabled=false;
 
 const text=document.getElementById("text");
@@ -137,8 +139,10 @@ function playSong(index){
     music.pause();
     music.src = songs[index];
     music.load();
-    music.volume = 0.6;
-    music.play().catch(()=>{});
+    music.volume = 0.7;
+    music.play().catch(err=>{
+        console.log("Audio blocked:", err);
+    });
 }
 
 function show(id){
