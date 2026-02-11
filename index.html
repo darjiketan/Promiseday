@@ -62,18 +62,14 @@ button{
 
 <body>
 
-<!-- 🎵 SINGLE AUDIO PLAYER -->
-<audio id="bgm" preload="auto" loop></audio>
+<audio id="bgm" loop></audio>
 
 <!-- SCENE 1 -->
 <div id="s1" class="center">
     <div class="heart">🤞</div>
     <h1 class="love" style="font-size:46px;">Promise Day</h1>
     <p>Touch my promise, Komal ❤️</p>
-
-    <!-- MUST CLICK FIRST -->
-    <button onclick="enableMusic()">Enable Music 🎵</button>
-    <button onclick="start()">Touch My Promise</button>
+    <button onclick="start()">Touch My Promise 💖</button>
 </div>
 
 <!-- SCENE 2 -->
@@ -85,24 +81,10 @@ button{
     </div>
 </div>
 
-<!-- SCENE 3 -->
-<div id="s3" class="center hidden">
-    <h2 class="love" style="font-size:40px;">Forever Promise 🤍</h2>
-    <p style="font-size:19px;max-width:330px;">
-        Ye sirf words nahi,<br>
-        meri zindagi ka promise hai Komal ❤️
-    </p>
-    <button onclick="finalSeal()">Lock Our Promise 💍</button>
-</div>
-
 <!-- FINAL -->
 <div id="final" class="center hidden">
     <div style="font-size:120px;">💍</div>
     <h2 class="love" style="font-size:42px;">Promise Locked Forever 🤍</h2>
-    <p style="font-size:20px;max-width:320px;">
-        From this moment,<br>
-        our hearts are bound by promises 💖
-    </p>
 </div>
 
 <script>
@@ -114,53 +96,33 @@ const promises=[
 ];
 
 const songs=[
- "./romantic.mp3",
- "./romantic2.mp3",
- "./romantic3.mp3",
- "./romantic4.mp3",
- "./romantic5.mp3"
+ "romantic.mp3",
+ "romantic2.mp3",
+ "romantic3.mp3",
+ "romantic4.mp3"
 ];
 
 let i=0, j=0;
-let musicEnabled=false;
-
 const text=document.getElementById("text");
 const music=document.getElementById("bgm");
 
-function enableMusic(){
-    musicEnabled=true;
-    playSong(0);
-    alert("Music Enabled ❤️");
-}
-
-function playSong(index){
-    if(!musicEnabled) return;
-
-    music.pause();
-    music.src = songs[index];
-    music.load();
+function playSong(n){
+    music.src = songs[n];
     music.volume = 0.7;
-    music.play().catch(err=>{
-        console.log("Audio blocked:", err);
-    });
-}
-
-function show(id){
-    document.querySelectorAll(".center").forEach(s=>s.classList.add("hidden"));
-    document.getElementById(id).classList.remove("hidden");
+    music.play();
 }
 
 function start(){
+    playSong(0);   // 🔥 SAME CLICK ME MUSIC
     show("s2");
     i=0; j=0;
     text.innerHTML="";
-    playSong(0);
     typeText();
 }
 
 function typeText(){
     if(j<promises[i].length){
-        text.innerHTML += promises[i][j++];
+        text.innerHTML+=promises[i][j++];
         setTimeout(typeText,45);
     }
 }
@@ -168,18 +130,18 @@ function typeText(){
 function nextPromise(){
     if(i<promises.length-1){
         i++; j=0;
-        text.innerHTML="";
         playSong(i);
+        text.innerHTML="";
         typeText();
     }else{
-        show("s3");
-        playSong(4);
+        show("final");
+        playSong(3);
     }
 }
 
-function finalSeal(){
-    show("final");
-    playSong(4);
+function show(id){
+    document.querySelectorAll(".center").forEach(s=>s.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
 }
 </script>
 
